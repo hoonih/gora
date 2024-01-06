@@ -38,6 +38,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         initFirebaseToken()
     }
 
+    private fun  initMoveSearch() {
+        binding.tvMainSearch.setOnClickListener {
+            val intent  = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+            }
+    }
+
     private fun initFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
