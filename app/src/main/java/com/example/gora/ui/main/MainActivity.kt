@@ -1,7 +1,6 @@
 package com.example.gora.ui.main
 
 import android.Manifest
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,18 +9,19 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.viewmodel.CreationExtras.Empty.map
-import com.example.gora.R
+import com.example.gora.FirebaseToken
 import com.example.gora.databinding.ActivityMainBinding
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
+import com.example.gora.ui.SearchDialog
+import com.google.firebase.messaging.FirebaseMessaging
 import net.daum.mf.map.api.MapView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding:ActivityMainBinding
     private val ACCESS_FINE_LOCATION = 1000
@@ -34,6 +34,19 @@ class MainActivity : AppCompatActivity() {
 
         initMapView()
         initDialog()
+        initFirebaseToken()
+    }
+
+    private fun initFirebaseToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                FirebaseToken = token
+                Log.d("TEST","firebaseToken"+ token)
+            } else {
+                // 토큰 등록 실패 시 처리 로직을 작성합니다.
+            }
+        }
     }
 
     private fun initMapView() {
@@ -122,8 +135,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initDialog() {
         binding.floatMain.setOnClickListener {
-
+            /*val builder = AlertDialog.Builder(this)
+            builder.show()*/
+            val dialog = SearchDialog(this)
+            dialog.show("")
         }
+
+    }
+
+    override fun onClick(view: View?) {
+
     }
 
     /*private fun setBuildingMaker() {
