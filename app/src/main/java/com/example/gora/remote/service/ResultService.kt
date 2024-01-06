@@ -31,8 +31,8 @@ data class Subway (
 )
 interface ResultService {
 
-    @GET("/test")
+    @POST("/map")
     fun result(
-        //@Body request: ResultRequest
+        @Body request: ResultRequest
     ): Call<List<ResultResponse>>
 }

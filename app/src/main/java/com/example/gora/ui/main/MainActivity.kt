@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.gora.FirebaseToken
+import com.example.gora.createNotificationChannel
 import com.example.gora.databinding.ActivityMainBinding
 import com.example.gora.ui.SearchActivity
 import com.example.gora.ui.SearchDialog
@@ -36,13 +37,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         initMapView()
         initFirebaseToken()
-    }
-
-    private fun  initMoveSearch() {
-        binding.tvMainSearch.setOnClickListener {
-            val intent  = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-            }
+        topbar()
+        createNotificationChannel(baseContext,"1000","AppJam")
     }
 
     private fun initFirebaseToken() {

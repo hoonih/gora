@@ -13,9 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gora.AddressData
 import com.example.gora.Document
 import com.example.gora.END_ADDRESS
+import com.example.gora.END_X
+import com.example.gora.END_Y
 import com.example.gora.R
 import com.example.gora.ResultActivity
 import com.example.gora.START_ADDRESS
+import com.example.gora.START_X
+import com.example.gora.START_Y
 import com.example.gora.databinding.ActivitySearchBinding
 import com.google.gson.Gson
 import org.json.JSONArray
@@ -25,6 +29,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.Locale
 
 class SearchActivity : AppCompatActivity() {
 
@@ -44,17 +49,39 @@ class SearchActivity : AppCompatActivity() {
         coordinatesMap = mutableMapOf()
         var isSecound = false
 
+        var end_x = ""
+        var end_y = ""
+        var start_x = ""
+        var start_y = ""
+
         adapter = AddressAdapter(resultList) { address ->
+            Log.d("TEST","x"+addressToLatLng(address))
+
             val coordinates = coordinatesMap[address]
             if (coordinates != null) {
                 val latitude = coordinates.first
                 val longitude = coordinates.second
+                Log.d("TEST","a"+latitude)
+
                 // 선택된 주소의 위도와 경도 값을 사용하여 원하는 작업을 수행하세요.
+
             }
+            if(isSecound) {
+                end_x = addressToLatLng(address)?.second.toString()
+                end_y = addressToLatLng(address)?.first.toString()
+            }else {
+                start_x = addressToLatLng(address)?.second.toString()
+                start_y = addressToLatLng(address)?.first.toString()
+            }
+
 
             if(isSecound) {
                 END_ADDRESS = address
                 val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra("end_x",end_x)
+                intent.putExtra("end_y",end_y)
+                intent.putExtra("start_x",start_x)
+                intent.putExtra("start_y",start_y)
                 startActivity(intent)
             }else {
                 START_ADDRESS = address
@@ -81,6 +108,21 @@ class SearchActivity : AppCompatActivity() {
                 return true
             }
         })
+    }
+
+    private fun addressToLatLng(address: String): Pair<Double, Double>? {
+        val geocoder = Geocoder(baseContext, Locale.getDefault())
+        val addressList = geocoder.getFromLocationName(address, 1)
+
+        if (addressList != null) {
+            if (addressList.isNotEmpty()) {
+                val latitude = addressList[0].latitude
+                val longitude = addressList[0].longitude
+                return Pair(latitude, longitude)
+            }
+        }
+
+        return null
     }
 
 

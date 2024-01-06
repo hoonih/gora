@@ -6,7 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
+    <ImageView
+        android:id="@+id/iv_login"
+        android:layout_width="193dp"
+        android:layout_height="193dp"
+        android:src="@drawable/whale"
+        android:layout_marginTop="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\너의 흰수염고래가 되어줄게"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/regular"
+        app:layout_constraintStart_toStartOf="@id/iv_login"
+        app:layout_constraintEnd_toEndOf="@id/iv_login"
+        app:layout_constraintTop_toBottomOf="@id/iv_login"/>
     <FrameLayout
         android:id="@+id/bt_kakao"
         android:layout_width="match_parent"

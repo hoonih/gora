@@ -13,6 +13,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             val title = notification.title
             val body = notification.body
             Log.d("FCM", "푸시 알림 메시지 수신 - 제목: $title, 내용: $body")
+            showNotification(baseContext,"1000",title!!, body!!)
 
             // 수신한 메시지에 대한 추가적인 로직을 작성할 수 있습니다.
         }
