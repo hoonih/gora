@@ -11,7 +11,7 @@ data class LoginRequest(
 )
 
 interface LoginService {
-    @POST("/login")
+    @POST("api/auth/login")
     fun login(
         @Body loginRequest: LoginRequest
     ): Call<String>
