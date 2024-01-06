@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.gora.FirebaseToken
 import com.example.gora.databinding.ActivityMainBinding
+import com.example.gora.ui.SearchActivity
 import com.example.gora.ui.SearchDialog
 import com.google.firebase.messaging.FirebaseMessaging
 import net.daum.mf.map.api.MapView
@@ -35,8 +36,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         initMapView()
         initDialog()
         initFirebaseToken()
+        initMoveSearch()
     }
 
+    private fun  initMoveSearch() {
+        binding.tvMainStart.setOnClickListener {
+            val intent = Intent(this,SearchActivity::class.java)
+            startActivity(intent)
+        }
+        binding.tvMainEnd.setOnClickListener {
+            val intent = Intent(this,SearchActivity::class.java)
+            startActivity(intent)
+        }
+    }
     private fun initFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
