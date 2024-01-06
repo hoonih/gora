@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "312552927608",
+    "project_id": "appjam-13ff4",
+    "storage_bucket": "appjam-13ff4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312552927608:android:6ddc06268327fe27e6d88d",
+        "android_client_info": {
+          "package_name": "com.example.gora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEdQRQ-l0tY8AYeq_Y0IxuBfs1_2bHlnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
