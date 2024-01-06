@@ -1,5 +1,6 @@
 package com.example.gora.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import com.example.gora.databinding.ActivityLoginBinding
 import com.example.gora.remote.RetrofitClient
 import com.example.gora.remote.service.LoginRequest
 import com.example.gora.remote.service.LoginService
+import com.example.gora.ui.main.MainActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -21,7 +23,7 @@ import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
 
     private fun goralogin(token: String, username: String) {
         val loginservice = RetrofitClient.getRetrofit().create(LoginService::class.java)
@@ -37,6 +39,10 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful()) {
                     Log.d("test", "test")
+                    if(response.code() == 204) {
+                        val intent = Intent(baseContext,MainActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
                 else {
                     try {

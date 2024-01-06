@@ -5,17 +5,17 @@
 
     <font android:font="@font/bold"/>
 
-    <font android:font="@font/extraBold"/>
+    <font android:font="@font/extra_bold"/>
 
-    <font android:font="@font/extraLight"/>
+    <font android:font="@font/extra_light"/>
 
     <font android:font="@font/light"/>
 
     <font android:font="@font/medium"/>
 
     <font android:font="@font/regular"/>
-    
-    <font android:font="@font/semiBold"/>
+
+    <font android:font="@font/semi_bold"/>
 
     <font android:font="@font/thin"/>
 </font-family>
