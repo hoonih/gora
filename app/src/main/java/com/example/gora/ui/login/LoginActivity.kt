@@ -40,6 +40,11 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful()) {
                     Log.d("test", "test")
                     if(response.code() == 204) {
+                        val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
+                        val autoLoginEdit = auto.edit()
+                        autoLoginEdit.putString("token", token)
+                        autoLoginEdit.commit()
+
                         val intent = Intent(baseContext,MainActivity::class.java)
                         startActivity(intent)
                     }
