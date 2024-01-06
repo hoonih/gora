@@ -30,7 +30,7 @@ class MyPageActivity : AppCompatActivity() {
                 if (response.isSuccessful()) {
                     Log.d("test", "test")
                     binding.txName.text = response.body()?.userName
-                    binding.txPoint.text = "온도: ${response.body()?.userName}°C"
+                    binding.txPoint.text = "온도: ${response.body()?.point}°C"
                 }
                 else {
                     try {
@@ -59,6 +59,8 @@ class MyPageActivity : AppCompatActivity() {
         val userid = sp.getString("token", null)
 
         userinfo(userid.toString())
+
+        binding.ivMyPage.setOnClickListener { finish() }
 
     }
 }

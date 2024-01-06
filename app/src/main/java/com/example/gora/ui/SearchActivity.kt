@@ -1,5 +1,6 @@
 package com.example.gora.ui
 
+import android.content.Intent
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gora.AddressData
 import com.example.gora.Document
+import com.example.gora.END_ADDRESS
 import com.example.gora.R
+import com.example.gora.ResultActivity
 import com.example.gora.START_ADDRESS
 import com.example.gora.databinding.ActivitySearchBinding
 import com.google.gson.Gson
@@ -39,6 +42,8 @@ class SearchActivity : AppCompatActivity() {
 
         resultList = mutableListOf()
         coordinatesMap = mutableMapOf()
+        var isSecound = false
+
         adapter = AddressAdapter(resultList) { address ->
             val coordinates = coordinatesMap[address]
             if (coordinates != null) {
@@ -46,10 +51,18 @@ class SearchActivity : AppCompatActivity() {
                 val longitude = coordinates.second
                 // 선택된 주소의 위도와 경도 값을 사용하여 원하는 작업을 수행하세요.
             }
-            
-            START_ADDRESS = address
-            binding.searchSearch.setQuery("", false)
-            binding.searchSearch.queryHint = "도착지 입력"
+
+            if(isSecound) {
+                END_ADDRESS = address
+                val intent = Intent(this, ResultActivity::class.java)
+                startActivity(intent)
+            }else {
+                START_ADDRESS = address
+                binding.searchSearch.setQuery("", false)
+                binding.searchSearch.queryHint = "도착지 입력"
+                isSecound = true
+            }
+
         }
 
         binding.recyclerSearch.adapter = adapter
