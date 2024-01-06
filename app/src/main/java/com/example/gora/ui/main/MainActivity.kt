@@ -19,6 +19,7 @@ import com.example.gora.FirebaseToken
 import com.example.gora.databinding.ActivityMainBinding
 import com.example.gora.ui.SearchActivity
 import com.example.gora.ui.SearchDialog
+import com.example.gora.ui.mypage.MyPageActivity
 import com.google.firebase.messaging.FirebaseMessaging
 import net.daum.mf.map.api.MapView
 
@@ -34,21 +35,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         initMapView()
-        initDialog()
         initFirebaseToken()
-        initMoveSearch()
     }
 
-    private fun  initMoveSearch() {
-        binding.tvMainStart.setOnClickListener {
-            val intent = Intent(this,SearchActivity::class.java)
-            startActivity(intent)
-        }
-        binding.tvMainEnd.setOnClickListener {
-            val intent = Intent(this,SearchActivity::class.java)
-            startActivity(intent)
-        }
-    }
     private fun initFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -145,15 +134,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.mapviewMain.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
     }
 
-    private fun initDialog() {
-        binding.floatMain.setOnClickListener {
-            /*val builder = AlertDialog.Builder(this)
-            builder.show()*/
-            val dialog = SearchDialog(this)
-            dialog.show("")
+    private fun topbar() {
+        binding.btSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
         }
-
+        binding.igProfile.setOnClickListener {
+            val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
     override fun onClick(view: View?) {
 
