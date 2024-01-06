@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gora.AddressData
 import com.example.gora.Document
 import com.example.gora.R
+import com.example.gora.START_ADDRESS
 import com.example.gora.databinding.ActivitySearchBinding
 import com.google.gson.Gson
 import org.json.JSONArray
@@ -45,10 +46,16 @@ class SearchActivity : AppCompatActivity() {
                 val longitude = coordinates.second
                 // 선택된 주소의 위도와 경도 값을 사용하여 원하는 작업을 수행하세요.
             }
+            
+            START_ADDRESS = address
+            binding.searchSearch.setQuery("", false)
+            binding.searchSearch.queryHint = "도착지 입력"
         }
 
         binding.recyclerSearch.adapter = adapter
         binding.recyclerSearch.layoutManager = LinearLayoutManager(this)
+
+
 
         binding.searchSearch.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(keyword: String?): Boolean {
@@ -97,6 +104,7 @@ class SearchActivity : AppCompatActivity() {
                         updateRecyclerView(addressNames)
                     }
 
+
                     parseResponse(response.toString())
                 }
             } catch (e: IOException) {
@@ -133,6 +141,8 @@ class SearchActivity : AppCompatActivity() {
     fun updateRecyclerView(newAddressList: List<String>) {
         adapter.updateAddressList(newAddressList)
         adapter.notifyDataSetChanged()
+
+
     }
     private fun initSearch() {
 

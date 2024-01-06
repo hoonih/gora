@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gora.R
+import com.example.gora.START_ADDRESS
 
 class AddressAdapter(private var addressList: List<String>, private val onItemClick: (String) -> Unit) :
     RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() {
@@ -39,6 +41,8 @@ class AddressAdapter(private var addressList: List<String>, private val onItemCl
                 }
             }
         }
+
+
 
         fun bind(address: String) {
             textView.text = address

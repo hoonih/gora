@@ -1,7 +1,9 @@
 package com.example.gora.ui.main
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
@@ -15,6 +17,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import com.example.gora.FirebaseToken
 import com.example.gora.databinding.ActivityMainBinding
 import com.example.gora.ui.SearchActivity
@@ -22,7 +26,7 @@ import com.example.gora.ui.SearchDialog
 import com.google.firebase.messaging.FirebaseMessaging
 import net.daum.mf.map.api.MapView
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
     private val ACCESS_FINE_LOCATION = 1000
@@ -40,15 +44,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun  initMoveSearch() {
-        binding.tvMainStart.setOnClickListener {
-            val intent = Intent(this,SearchActivity::class.java)
+        binding.tvMainSearch.setOnClickListener {
+            val intent  = Intent(this, SearchActivity::class.java)
             startActivity(intent)
-        }
-        binding.tvMainEnd.setOnClickListener {
-            val intent = Intent(this,SearchActivity::class.java)
-            startActivity(intent)
-        }
+            }
     }
+
     private fun initFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -152,10 +153,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val dialog = SearchDialog(this)
             dialog.show("")
         }
-
-    }
-
-    override fun onClick(view: View?) {
 
     }
 
